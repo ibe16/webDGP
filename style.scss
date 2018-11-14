@@ -14,7 +14,7 @@ $enable-print-styles:       true;
 // Colors
 
 $theme-colors: (
-  primary: #4caf50,
+  primary: #006161,
   secondary: #4f70ce,
   light: #f3f3f3,
   dark: #151515,
@@ -29,7 +29,7 @@ $body-color: #333;
 
 
 $body-color-inverse: invert($body-color) !default;
-$link-color: #4caf50;
+$link-color: #006161;
 
 // Fonts
 $font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
