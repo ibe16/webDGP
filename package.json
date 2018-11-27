@@ -1,0 +1,25 @@
+{
+  "name": "granaroutes_web",
+  "version": "1.0.0",
+  "description": "Repositorio para la página web del proyecto de rutas accesibles para la aplicación DGP",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibe16/webDGP.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ibe16/webDGP/issues"
+  },
+  "homepage": "https://github.com/ibe16/webDGP#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "firebase": "^5.5.9",
+    "firebase-admin": "^6.2.0"
+  }
+}

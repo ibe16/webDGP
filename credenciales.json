@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "granaroutesaplicacion",
+    "private_key_id": "e929448192f9f3af2e0b21623aabb82ad48356e1",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC76QPTCzetMFQF\n2jRoMp2qJ6Ly2OIPvQspOz2oHDw4N6FSfxx4gSKs3FlLUnmhUenOAk0LGkMD9u/J\n8j4g8RmtXRzNiZ0BJ36GJTUX0sU1zNskbmPqgoX+TfsyytisTdlBJemcoLZWxfMF\nQDcFSUQKqKP2RN/CtkPTtepqplEZAB0pxo09Mxxc005uWAWELFbTDcKh8jLW0DyF\nZ4TL0wVgaE3FQzmPX0VwadGzjDl1jSXW0PvcBzkVdlJHcyF/kyAmZPlZ+4NDBeO7\n7RFJXSj5XOV9XdsAU5h6eNZfu5tQAENd5IgE8n8fgWdcyWSt98sdTn7KBmcwAlz5\nvEbicCsFAgMBAAECggEABB/guByqa7BAX+KCvPjDci0ti/QLvjmxiYWl3E9GWRuL\nfHKSzuhSuQWbJiaYydww7Bcr1r8MUoV0jPO2vmVcYWxGShKnshNKWSpu6Gd1cbFd\n7AZKRib4RvUyOtKt/9YzmxT4dDoo1m3A4FAhBQovJqa99pVbbfwvL/Hxw8aDyC8p\nUxje6K8AR06+eyNxE/HmUp9nODxKFmRe7/qFlBc2v+cLTO89PWXINhISiT+fvWJy\n+tST4jNWLTnxBp92z5PQObA7nfK6l9SfookuVK5Hf+Rr0CI5IN9bu1VvcKu1L/uL\nFfEMFaIt+DHMyf23rwV26wOto3wE70s19Utbpr7NbwKBgQDgwoLrh+EX/T6ROfFF\nZYyx6tXjRJtnQ3TapTxS9zaHTmD2X75hz6a4A+xAxz4tNj0f7bJYeyQm5l+rASwk\n6Esj3KtEFJa5ucmpbFeNt6UVMgCzgNZFM/VDFxitW5k5v5vZyR7f6TtUO56bkwnW\nvH+yQG5iVIma7dfLnrzPAm0jfwKBgQDWB06qEBj8k7hejJiKqXBY6bDTmCd9D8K4\nZH3ZL1ILFeQ/G78BdPj0qywKPKByZYqCFEP47eIz/FkT6Nkx+PX6xmVjYDRfufVn\nkvnR5cl8TTPZnjPlVLDNCMM8qYZVKWZE1Z2zBVWJUnErZDgX6UGmtAQIUfSroq92\nIE2Dx7pjewKBgCNMyW0ekS7IWmxKsmcY1OkYnfEs1E96m76/VuMc6paDq9zmGquY\nBnI+Q3vFDzHgo+cA2RLmfD4TzpC4BWvig/Kk9M0jgqy2zkJqvrGGV0ol6VBH+t8x\nkuKvnPOVQFJ+koa4/L1kDypilr2OcWwlfNTNI8kTx+zqUAst6i+FDQkXAoGBAI+x\nmD7VT/FDvCS+gCuYVrVbMDzfiqOMUU87KMMH4i1PJU65ciOoRPz/bzHwQkiLo9Jx\niLE4BQaiBaw4SJokbAFR8gAmNwON9hTzuIYToJKzwnv4mx79HTaLC4lOx8GlaeQN\nBzOKAUOQ9ioLvx1OnaUudwae/4W8U9EbHu+6yIjBAoGAZyr+MyR41UBIqGiNFa2L\nRSMUDEbuR8GfRZTEATGKf/gIjhHK1rsI3/dHMteZk2lIqwiqLJolCKzMrRK4L1fN\noHshtC91ya1LtcIbxNCVewDI28PtgWWbL4epBf3LtQj48lQXOTnQGMWEg/ExgWJ8\ngrvn0HdoOO9mL14mQGDhitE=\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-6h7ys@granaroutesaplicacion.iam.gserviceaccount.com",
+    "client_id": "103885532833024544583",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-6h7ys%40granaroutesaplicacion.iam.gserviceaccount.com"
+  }
+  
