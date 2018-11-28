@@ -28,46 +28,30 @@
           <h1 class="text-primary mt-1">Lista de rutas</h1>
         </div>
       </div>
-      <div class="row p-1 bg-info m-1">
-        <div class="col-md-5 order-2 order-md-1">
-          <a href="/ruta"><img class="img-fluid d-block my-3 mx-auto animate-in-left" src="assets/imgs/foto_ruta.jpg" width="500"></a> </div>
-        <div class="col-md-7 align-self-center order-1 order-md-2 my-3 text-md-left text-center">
-          <a href="/ruta">
-            <h2>Ruta de Carlos V</h2>
-          </a>
-          <p class="my-4 text-dark">Volver a Granada siguiendo los itinerarios carolinos y sin tener en cuenta los circuitos habituales que muestran la ciudad árabe y medieval que universalizaran los viajeros románticos, permitirá descubrir la Granada que vio y diseñó el emperador Carlos V durante su estancia en 1526. Ver Itinerarios Carolinos en un mapa más grande</p>
-        </div>
-      </div>
-      <div class="row p-1 bg-info m-1">
-        <div class="col-md-5 order-2 order-md-1">
-          <a href="/ruta"><img class="img-fluid d-block my-3 mx-auto animate-in-left" src="assets/imgs/foto_ruta.jpg" width="500"></a> </div>
-        <div class="col-md-7 align-self-center order-1 order-md-2 my-3 text-md-left text-center">
-          <a href="/ruta">
-            <h2>Ruta de Carlos V</h2>
-          </a>
-          <p class="my-4 text-dark">Volver a Granada siguiendo los itinerarios carolinos y sin tener en cuenta los circuitos habituales que muestran la ciudad árabe y medieval que universalizaran los viajeros románticos, permitirá descubrir la Granada que vio y diseñó el emperador Carlos V durante su estancia en 1526. Ver Itinerarios Carolinos en un mapa más grande</p>
-        </div>
-      </div>
-      <div class="row p-1 bg-info m-1">
-        <div class="col-md-5 order-2 order-md-1">
-          <a href="/ruta"><img class="img-fluid d-block my-3 mx-auto animate-in-left" src="assets/imgs/foto_ruta.jpg" width="500"></a> </div>
-        <div class="col-md-7 align-self-center order-1 order-md-2 my-3 text-md-left text-center">
-          <a href="/ruta">
-            <h2>Ruta de Carlos V</h2>
-          </a>
-          <p class="my-4 text-dark">Volver a Granada siguiendo los itinerarios carolinos y sin tener en cuenta los circuitos habituales que muestran la ciudad árabe y medieval que universalizaran los viajeros románticos, permitirá descubrir la Granada que vio y diseñó el emperador Carlos V durante su estancia en 1526. Ver Itinerarios Carolinos en un mapa más grande</p>
-        </div>
-      </div>
-      <div class="row p-1 bg-info m-1">
-        <div class="col-md-5 order-2 order-md-1">
-          <a href="/ruta"><img class="img-fluid d-block my-3 mx-auto animate-in-left" src="assets/imgs/foto_ruta.jpg" width="500"></a> </div>
-        <div class="col-md-7 align-self-center order-1 order-md-2 my-3 text-md-left text-center">
-          <a href="/ruta">
-            <h2>Ruta de Carlos V</h2>
-          </a>
-          <p class="my-4 text-dark">Volver a Granada siguiendo los itinerarios carolinos y sin tener en cuenta los circuitos habituales que muestran la ciudad árabe y medieval que universalizaran los viajeros románticos, permitirá descubrir la Granada que vio y diseñó el emperador Carlos V durante su estancia en 1526. Ver Itinerarios Carolinos en un mapa más grande</p>
-        </div>
-      </div>
+
+
+
+      <%         ref.on("value", function (snapshot) { %>
+       <% snapshot.forEach(function (data) { %>
+
+
+       <div class="row p-1 bg-info m-1">
+           <div class="col-md-5 order-2 order-md-1">
+               <a href="ruta.html"><img class="img-fluid d-block my-3 mx-auto animate-in-left" src="215x140xb55ad31f80198046fe9b4597ac637fd0.jpg.pagespeed.ic.VgH-_BBqsx.jpg"
+                       width="500"></a> </div>
+           <div class="col-md-7 align-self-center order-1 order-md-2 my-3 text-md-left text-center">
+               <a href="ruta.html">
+                   <h2><%=  data.key %></h2>
+               </a>
+               <p class="my-4 text-dark"> <%= data.child("descripcion").val() %> </p>
+           </div>
+       </div>
+
+        <% }); %>
+   <% }); %>
+
+
+
       <hr class="mt-0">
     </div>
   </div>

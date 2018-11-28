@@ -41,7 +41,13 @@ app.get('/login', (req, res) => res.render('login'));
 app.get('/register', (req, res) => res.render('registrarse'));
 
 // listado Rutas
-app.get('/list', (req, res) => res.render('listaRutas'));
+//app.get('/list', (req, res) => res.render('listaRutas'));
+
+app.get('/listaRutas', function (req, res, next) {
+  var db = admin.database();
+  var ref = db.ref("rutas");
+  res.render('listaRutas', { ref: ref});
+});
 
 // proponerRutas
 app.get('/newRoute', (req, res) => res.render('proponerRuta'));
