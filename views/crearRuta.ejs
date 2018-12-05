@@ -29,81 +29,107 @@
   <div class="h-100 py-0 text-center" style="	background-image: url(assets/imgs/alhambra2.jpeg);	background-size: cover;	background-position: bottom;	background-repeat: repeat;">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 col-10 bg-white mx-auto mt-5 pt-3 pb-2 px-0" style="">
-          <h1 class="mb-4" style="">Crear Ruta</h1>
-          <div class="col-md-12" style="">
-            <div class="form-group mt-2"><label>Título</label><input name="titulo" class="form-control" placeholder="Título de la ruta"></div>
-            <div class="form-group"><label>Descripción</label><textarea name="descripcion" class="form-control mt-2" id="form35" rows="3" placeholder="Descripción de la ruta"></textarea></div>
-            <div class="form-group"><label>Lugares de la ruta: </label>
-                <select name="lugares" multiple> 
-                     <%         ref.on("value", function (snapshot) { %>
-                        <% snapshot.forEach(function (data) { %>
-                       
-                            <option value="<%= data.key %>"> <%= data.key%> </option>
- 
-                     <% }); %>
-                     <% }); %>
+        <div class="col-md-6 col-10 bg-white mx-auto mt-5 pt-3 pb-2 px-0" >
+          <h1 class="mb-4" >Crear Ruta</h1>
+          <form action="#" method="post">
+            <div class="col-md-12" >
+              <div class="form-group mt-2">
+                <!-- TITULO de la Ruta-->
+                <label>Título</label>
+                <input name="titulo" class="form-control" placeholder="Título de la ruta">
+              </div>
+                <div class="form-group">
+                  <!-- DESC de la Ruta-->
+                  <label>Descripción</label><textarea name="descripcion" class="form-control mt-2" id="form35" rows="3" placeholder="Descripción de la ruta"></textarea>
+                </div>
+                <div class="form-group">
+                  <!-- LUGARES de la Ruta-->
+                  <label>Lugares de la ruta: </label>
+                  <select name="lugares" multiple> 
+                    <%         ref.on("value", function (snapshot) { %>
+                      <% snapshot.forEach(function (data) { %>
                         
-                </select>
-                <a class="btn navbar-btn text-white mx-2 btn-primary" href="/crearLugar">Crear Lugar</a>
+                        <option name="lugares[<%= data.key %>]" value="<%= data.key %>"> <%= data.key%> </option>
+                        
+                      <% }); %>
+                    <% }); %>
+                  </select>
+                  <a class="btn navbar-btn text-white mx-2 btn-primary" href="/crearLugar">Crear Lugar</a>
+                    </div>
+                    <div class="form-group">
+                      <!-- Grupos -->
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="grupos[vista]" id="form21" value="true"> <label class="form-check-label" for="form21">Accesible para problemas de vision</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="grupos[oido]" id="form21" value="true"> <label class="form-check-label" for="form21">Accesible para problemas de audición</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="grupos[movilidad]" id="form21" value="true"> <label class="form-check-label" for="form21">Accesible para problemas de movilidad</label>
+                      </div>
+                    </div>
+                    <div class="form-group mt-2">
+                      <div class="row">
+                        <div class="col-md-6" >
+                          <!-- URL MAPA ANDROID -->
+                          <div class="form-group">
+                            <input name="mapaAndroid" class="form-control w-100" placeholder="URL de la ruta android">
+                          </div>
+                        </div>
+                      </div> 
+                    </div>
+                    <div class="form-group mt-2">
+                      <div class="row">
+                        <div class="col-md-6" >
+                          <!-- MAPA WEB -->
+                          <div class="form-group">
+                            <input name="mapaWEB" class="form-control w-100" placeholder="URL de la ruta web">
+                          </div>
+                        </div>
+                        <div class="col-md-6" >
+                          <button type="button" onClick="parent.open('https://www.google.com/maps/d/edit?mid=1nO98MJ7QrH_tyx26Z95Fn7SjuLhpfBzL&ll=34.36061899272663%2C-6.926807499999995&z=5')" class="btn btn-primary">Generar Ruta </button>
+                        </div>
+                      </div> 
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                  </div>
+                </form>
+              </div>
             </div>
-            <div class="form-group">
-              <div class="form-check"> <input class="form-check-input" type="checkbox" id="form21" value="on"> <label class="form-check-label" for="form21">Accesible para problemas de vision</label> </div>
-              <div class="form-check"> <input class="form-check-input" type="checkbox" id="form21" value="on"> <label class="form-check-label" for="form21">Accesible para problemas de audición</label> </div>
-              <div class="form-check"> <input class="form-check-input" type="checkbox" id="form21" value="on"> <label class="form-check-label" for="form21">Accesible para problemas de movilidad</label> </div>
-            </div>
-            <div class="form-group mt-2">
-              <div class="row">
-                <div class="col-md-6" style="">
-                  <div class="form-group"><input class="form-control w-100" placeholder="URL de la ruta android"></div>
-                </div>
-              </div> 
-            </div>
-            <div class="form-group mt-2">
-              <div class="row">
-                <div class="col-md-6" style="">
-                  <div class="form-group"><input class="form-control w-100" placeholder="URL de la ruta web"></div>
-                </div>
-                <div class="col-md-6" style=""><button type="button" onClick="parent.open('https://www.google.com/maps/d/edit?mid=1nO98MJ7QrH_tyx26Z95Fn7SjuLhpfBzL&ll=34.36061899272663%2C-6.926807499999995&z=5')" class="btn btn-primary">Generar Ruta </button></div>
-              </div> 
-            </div>
-          <button type="submit" class="btn btn-primary">Enviar</button>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="bg-primary">
-    <div class="container">
-      <div class="row">
-        <div class="p-4 col-md-4">
-          <h2 class="mb-4 text-light">Graná Routes</h2>
-          <p class="text-light">Tu aplicación de rutas accesibles por Granada.</p>
-        </div>
-        <div class="p-4 col-md-4">
-          <h2 class="mb-4 text-light">Mapa del sitio</h2>
-          <ul class="list-unstyled text-light"> <a href="index.html" class="text-light">Home</a> <br> <a href="listaRutas.html" class="text-light">Lista de rutas</a> <br> <a href="registrarse.html" class="text-light">Regístrate</a> <br> <a href="login.html" class="text-light">Iniciar sesión</a>
-          </ul>
-        </div>
-        <div class="p-4 col-md-4">
-          <h2 class="mb-0 text-light">Contacto</h2><br>
-          <a class="btn navbar-btn text-white btn-dark mx-2 ml-5 mb-3" href="newRoute">Proponer ruta</a>
-          <p class="text-light"> <a href="#" class="text-light">
-              <i class="fa d-inline mr-3 text-muted fa-envelope-o"></i>info@granaroutes.com</a> </p>
-          <p><br></p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 mt-3">
-          <p class="text-center text-light">© Copyright 2018 Graná Routes - All rights reserved. </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  
-</body>
-
-</html>
+        <div class="bg-primary">
+          <div class="container">
+            <div class="row">
+              <div class="p-4 col-md-4">
+                <h2 class="mb-4 text-light">Graná Routes</h2>
+                <p class="text-light">Tu aplicación de rutas accesibles por Granada.</p>
+              </div>
+              <div class="p-4 col-md-4">
+                <h2 class="mb-4 text-light">Mapa del sitio</h2>
+                <ul class="list-unstyled text-light"> <a href="index.html" class="text-light">Home</a> <br> <a href="listaRutas.html" class="text-light">Lista de rutas</a> <br> <a href="registrarse.html" class="text-light">Regístrate</a> <br> <a href="login.html" class="text-light">Iniciar sesión</a>
+                </ul>
+              </div>
+              <div class="p-4 col-md-4">
+                <h2 class="mb-0 text-light">Contacto</h2><br>
+                <a class="btn navbar-btn text-white btn-dark mx-2 ml-5 mb-3" href="newRoute">Proponer ruta</a>
+                <p class="text-light"> <a href="#" class="text-light">
+                  <i class="fa d-inline mr-3 text-muted fa-envelope-o"></i>info@granaroutes.com</a> </p>
+                  <p><br></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 mt-3">
+                  <p class="text-center text-light">© Copyright 2018 Graná Routes - All rights reserved. </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+          
+        </body>
+        
+        </html>
+        
