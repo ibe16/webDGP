@@ -5,14 +5,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/css/aquamarine.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container">
       <div class="row">
-        <div class="col-md-12"><img src="Logo_GranáRoutes.png" width="30" height="30" class="d-inline-block align-top m-0" alt=""></div>
+        <div class="col-md-12"><img src="assets/imgs/Logo_GranáRoutes.png" width="30" height="30" class="d-inline-block align-top m-0" alt=""></div>
       </div><a class="navbar-brand" href="index.html">&nbsp;Graná Routes&nbsp;</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
@@ -25,17 +26,27 @@
       </div>
     </div>
   </nav>
-  <div class="h-100 py-0 text-center" style="	background-image: url(alhambra2.jpeg);	background-size: cover;	background-position: bottom;	background-repeat: repeat;">
+  <div class="h-100 py-0 text-center" style="	background-image: url(assets/imgs/alhambra2.jpeg);	background-size: cover;	background-position: bottom;	background-repeat: repeat;">
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-10 bg-white mx-auto mt-5 pt-3 pb-2 px-0" style="">
           <h1 class="mb-4" style="">Crear Ruta</h1>
           <div class="col-md-12" style="">
-            <div class="form-group mt-2"><label>Título</label><input type="email" class="form-control" placeholder="Título de la ruta"></div>
-            <div class="form-group"><label>Descripción</label><textarea class="form-control mt-2" id="form35" rows="3" placeholder="Descripción de la ruta"></textarea></div>
-            <div class="form-group"><label>Lugares de la ruta</label><textarea class="form-control mt-2" id="form35" rows="3" placeholder="1.
-2.
-3."></textarea></div>
+            <div class="form-group mt-2"><label>Título</label><input name="titulo" class="form-control" placeholder="Título de la ruta"></div>
+            <div class="form-group"><label>Descripción</label><textarea name="descripcion" class="form-control mt-2" id="form35" rows="3" placeholder="Descripción de la ruta"></textarea></div>
+            <div class="form-group"><label>Lugares de la ruta: </label>
+                <select name="lugares" multiple> 
+                     <%         ref.on("value", function (snapshot) { %>
+                        <% snapshot.forEach(function (data) { %>
+                       
+                            <option value="<%= data.key %>"> <%= data.key%> </option>
+ 
+                     <% }); %>
+                     <% }); %>
+                        
+                </select>
+                <button type="button" class="btn btn-primary">Crear Lugar</button>
+            </div>
             <div class="form-group">
               <div class="form-check"> <input class="form-check-input" type="checkbox" id="form21" value="on"> <label class="form-check-label" for="form21">Accesible para problemas de vision</label> </div>
               <div class="form-check"> <input class="form-check-input" type="checkbox" id="form21" value="on"> <label class="form-check-label" for="form21">Accesible para problemas de audición</label> </div>
@@ -44,11 +55,20 @@
             <div class="form-group mt-2">
               <div class="row">
                 <div class="col-md-6" style="">
-                  <div class="form-group"><input type="email" class="form-control w-100" placeholder="URL de la ruta"></div>
+                  <div class="form-group"><input class="form-control w-100" placeholder="URL de la ruta android"></div>
                 </div>
-                <div class="col-md-6" style=""><button type="submit" class="btn btn-primary">Generar Ruta</button></div>
-              </div>
-            </div><button type="submit" class="btn btn-primary">Enviar</button>
+                <div class="col-md-6" style=""><button type="button" onClick="parent.open('http://localhost/adela/contacto/')" class="btn btn-primary">Generar Ruta Android</button></div>
+              </div> 
+            </div>
+            <div class="form-group mt-2">
+              <div class="row">
+                <div class="col-md-6" style="">
+                  <div class="form-group"><input class="form-control w-100" placeholder="URL de la ruta web"></div>
+                </div>
+                <div class="col-md-6" style=""><button type="button" onClick="parent.open('http://')" class="btn btn-primary">Generar Ruta </button></div>
+              </div> 
+            </div>
+          <button type="submit" class="btn btn-primary">Enviar</button>
           </div>
         </div>
       </div>
@@ -68,7 +88,7 @@
         </div>
         <div class="p-4 col-md-4">
           <h2 class="mb-0 text-light">Contacto</h2><br>
-          <a class="btn navbar-btn text-white btn-dark mx-2 ml-5 mb-3" href="proponerRuta.html">Proponer ruta</a>
+          <a class="btn navbar-btn text-white btn-dark mx-2 ml-5 mb-3" href="newRoute">Proponer ruta</a>
           <p class="text-light"> <a href="#" class="text-light">
               <i class="fa d-inline mr-3 text-muted fa-envelope-o"></i>info@granaroutes.com</a> </p>
           <p><br></p>
@@ -84,7 +104,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
+  
 </body>
 
 </html>

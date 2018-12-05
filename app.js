@@ -71,7 +71,13 @@ app.get('/gestor', (req, res) => res.render('gestor'));
 app.get('/listaProposiciones', (req, res) => res.render('listaProposiciones'));
 
 // Crear Ruta
-app.get('/crearRuta', (req, res) => res.render('crearRuta'));
+//app.get('/crearRuta', (req, res) => res.render('crearRuta'));
+
+app.get('/crearRuta', function(req, res, next){
+  var db = admin.database();
+  var ref = db.ref("lugares");
+  res.render('crearRuta', {ref :ref});
+});
 
 
 /* USUARIOS */
