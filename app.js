@@ -57,19 +57,12 @@ app.get('/newRoute', (req, res) => res.render('proponerRuta'));
 
 // vista Ruta
 app.get('/ruta', function(req, res){
-<<<<<<< HEAD
 	var nombre = req.query.nombreruta || " ";
 	var db = admin.database();
 	var ref = db.ref("rutas/"+nombre);
 	var lugares = db.ref("lugares/");
 
 	res.render('ruta', {ref :ref, lugares:lugares});
-=======
-  var nombre = req.query.nombreruta || " ";
-  var db = admin.database();
-  var ref = db.ref("rutas/"+nombre);
-  res.render('ruta', {ref :ref});
->>>>>>> 5321059061ebad8341b1775d645bc9fd2faaa937
 });
 
 /* GESTOR */
