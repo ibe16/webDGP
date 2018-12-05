@@ -26,6 +26,10 @@
       </div>
     </div>
   </nav>
+
+  
+
+<% ref.on("value", function (snapshot) { %>
   <div class="py-5" style="">
     <div class="container">
       <div class="row">
@@ -33,25 +37,34 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12" style=""><iframe src="https://www.google.com/maps/d/embed?mid=1wGpIHY2oz37ciLvdKKYZbpZPyI_a5oSM" width="100%" height="400"></iframe></div>
-      </div>
+        
+        <div class="col-md-12" style=""><iframe src='<%- snapshot.child("mapWeb").val() %>'
+            width="100%" height="400"></iframe></div>
+        </div>
+      
       <div class="row">
         <div class="col-md-12 mt-2">
           <div class="row">
             <div class="col-md-12"><img class="img-fluid d-block float-left mx-1" src="assets/imgs/movilidad.png" width="50"><img class="img-fluid d-block float-left mx-1" src="assets/imgs/vista.png" width="50"><img class="img-fluid d-block float-left mx-1" src="assets/imgs/auditivo.png" width="50"></div>
           </div>
-          <h2 class="mt-2 text-primary">Ruta de Carlos V</h2>
-          <p class="lead" contenteditable="true">Volver a Granada siguiendo los itinerarios carolinos y sin tener en cuenta los circuitos habituales que muestran la ciudad árabe y medieval que universalizaran los viajeros románticos, permitirá descubrir la Granada que vio y diseñó el emperador Carlos V durante su estancia en 1526.<br></p>
+          <h2 class="mt-2 text-primary"><%= snapshot.child("nombre").val() %></h2>
+          <p class="lead" contenteditable="true"><%= snapshot.child("descripcion").val() %><br></p>
           <h2 class="mt-2 text-primary" contenteditable="true">Lugares de la ruta</h2>
           <ol class="" type="1">
-            <li class="my-1"><b>Puerta Elvira</b>: Puerta musulmana, ya existente en el siglo IX, era la principal de Granada. Fue testigo del vistoso, multicolor y pluritécnico recibimiento brindado por la ciudad y el reino de Granada a la pareja imperial, el 4 de junio de 1526. Aquí juró Carlos V respetar los privilegios, usos y costumbres de la ciudad</li>
-            <li class="my-1">Pilar de Carlos V: Mandado construir por el conde de Tendilla, lo trazó Pedro Machuca y lo ejecutó en 1547 Niccolo da Corte. En el cuerpo bajo del pilar aparecen tres mascarones arrojando agua por las bocas, que unos interpretan como símbolos de los tres ríos de Granada (Darro, Genil y Beiro) y otros, del verano, primavera y otoño.</li>
-            <li class="my-1">Puerta de las Granadas: Mandada edificar por Carlos V, el proyecto fue llevado a cabo por Pedro Machuca, ocupando el lugar de una puerta musulmana. De esta puerta de las alamedas arrancan tres caminos: el de la izquierda conduce a la puerta de la Justicia, el del centro al Generalife, y el de la derecha al carmen de los Mártires.</li>
-          </ol>
+          <% lugares.on("value", function (lugaresSnapshot) { %>
+            <% snapshot.child("lugares").forEach(function (data) { %>
+              <li class="my-1"><b><%= data.key %></b>: <%= lugaresSnapshot.child(data.key).child("descripcion").val() %></li>
+            <% }); %>
+          <% }); %>
+            </ol>
         </div>
       </div>
     </div>
   </div>
+<% }); %>
+
+
+
   <div class="bg-primary">
     <div class="container">
       <div class="row">
