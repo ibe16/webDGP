@@ -78,7 +78,7 @@ app.get('/crearRuta', function(req, res, next){
   res.render('crearRuta', { ref : ref });
 });
 
-// Crear Ruta - Subirla a FireBase
+// Crear Ruta - Procesamiento y Update BaseDatos
 app.post('/crearRuta', (req, res) => {
   /* Variables Auxiliares */
   var f_para = req.body;
@@ -150,9 +150,51 @@ app.post('/crearRuta', (req, res) => {
 
 });
 
-//crearLugar
+// Crear Lugar - Formulario
 app.get('/crearLugar', (req, res) => res.render('crearLugar'));
 
+// Crear Lugar - Procesamiento y Update BaseDatos
+app.post('/crearLugar', (req, res) => {
+
+  // Variables Auxiliares
+  var f_para = req.body;
+  var f_valida = true;
+  var nuevo_lugar = {};
+
+  /* Comprueba que estan todos los parametros || TODO : Comprobar formato INPUT */
+  // Nombre
+  if(!f_para.hasOwnProperty('nombre') || f_para.nombre.length <= 0) {
+    f_valida = false;
+  }
+  // Descripción
+  if(!f_para.hasOwnProperty('descripcion') || f_para.descripcion.length <= 0) {
+    f_valida = false;
+  }
+
+  if(!f_valida) {
+    console.log('cagada');
+    // Si el formato no es valido saca mensaje
+    // TODO : Render pagina anterior con campos erroneos resaltados en rojo
+    res.send('Por favor vuelva a rellenar el formulario y \
+    no deje ningún campo en blanco. <a href="/crearLugar">Atrás</a>');
+  }
+
+  /* Genera el Obj para subirlo a FireBase */
+  nuevo_lugar[f_para.nombre] = {
+    descripcion : f_para.descripcion
+  };
+
+  /* Subir el nuevo lugar a FireBase */
+  // Coje instancia de FireBase y colocate en lugares
+  var lugaresRef = admin.database().ref('lugares');
+
+  // Sube el nuevo lugar
+  lugaresRef.update(nuevo_lugar);
+
+  // Mensaje todo ha salido bien
+  res.send('Lugar añadida correctamente! Ahora tendira que verlo en el \
+  <a href="/crearRuta">formulario</a> de creación de Rutas.');
+});
 
 /* USUARIOS */
 // Modificar Usuario
