@@ -60,7 +60,9 @@ app.get('/ruta', function(req, res){
 	var nombre = req.query.nombreruta || " ";
 	var db = admin.database();
 	var ref = db.ref("rutas/"+nombre);
-	res.render('ruta', {ref :ref});
+	var lugares = db.ref("lugares/");
+
+	res.render('ruta', {ref :ref, lugares:lugares});
 });
 
 
