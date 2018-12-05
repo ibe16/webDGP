@@ -52,6 +52,8 @@ app.get('/listaRutas', function (req, res, next) {
 
 });
 
+
+
 // proponerRutas
 app.get('/newRoute', (req, res) => res.render('proponerRuta'));
 
@@ -80,6 +82,9 @@ app.get('/crearRuta', function(req, res, next){
   var ref = db.ref("lugares");
   res.render('crearRuta', {ref :ref});
 });
+
+//crearLugar
+app.get('/crearLugar', (req, res) => res.render('crearLugar'));
 
 
 /* USUARIOS */

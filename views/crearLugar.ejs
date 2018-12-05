@@ -19,7 +19,7 @@
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item mx-2">
-            <a class="nav-link" href="listaRutas.html">Rutas</a>
+            <a class="nav-link" href="listaRutas">Rutas</a>
           </li>
         </ul>
         <a class="btn navbar-btn text-white mx-2 btn-primary" href="login.html">Iniciar Sesión</a>
@@ -32,41 +32,8 @@
         <div class="col-md-6 col-10 bg-white mx-auto mt-5 pt-3 pb-2 px-0" style="">
           <h1 class="mb-4" style="">Crear Ruta</h1>
           <div class="col-md-12" style="">
-            <div class="form-group mt-2"><label>Título</label><input name="titulo" class="form-control" placeholder="Título de la ruta"></div>
-            <div class="form-group"><label>Descripción</label><textarea name="descripcion" class="form-control mt-2" id="form35" rows="3" placeholder="Descripción de la ruta"></textarea></div>
-            <div class="form-group"><label>Lugares de la ruta: </label>
-                <select name="lugares" multiple> 
-                     <%         ref.on("value", function (snapshot) { %>
-                        <% snapshot.forEach(function (data) { %>
-                       
-                            <option value="<%= data.key %>"> <%= data.key%> </option>
- 
-                     <% }); %>
-                     <% }); %>
-                        
-                </select>
-                <a class="btn navbar-btn text-white mx-2 btn-primary" href="/crearLugar">Crear Lugar</a>
-            </div>
-            <div class="form-group">
-              <div class="form-check"> <input class="form-check-input" type="checkbox" id="form21" value="on"> <label class="form-check-label" for="form21">Accesible para problemas de vision</label> </div>
-              <div class="form-check"> <input class="form-check-input" type="checkbox" id="form21" value="on"> <label class="form-check-label" for="form21">Accesible para problemas de audición</label> </div>
-              <div class="form-check"> <input class="form-check-input" type="checkbox" id="form21" value="on"> <label class="form-check-label" for="form21">Accesible para problemas de movilidad</label> </div>
-            </div>
-            <div class="form-group mt-2">
-              <div class="row">
-                <div class="col-md-6" style="">
-                  <div class="form-group"><input class="form-control w-100" placeholder="URL de la ruta android"></div>
-                </div>
-              </div> 
-            </div>
-            <div class="form-group mt-2">
-              <div class="row">
-                <div class="col-md-6" style="">
-                  <div class="form-group"><input class="form-control w-100" placeholder="URL de la ruta web"></div>
-                </div>
-                <div class="col-md-6" style=""><button type="button" onClick="parent.open('https://www.google.com/maps/d/edit?mid=1nO98MJ7QrH_tyx26Z95Fn7SjuLhpfBzL&ll=34.36061899272663%2C-6.926807499999995&z=5')" class="btn btn-primary">Generar Ruta </button></div>
-              </div> 
-            </div>
+            <div class="form-group mt-2"><label>Nombre del lugar</label><input name="titulo" class="form-control" placeholder="Nombre"></div>
+            <div class="form-group"><label>Descripción del lugar</label><textarea name="descripcion" class="form-control mt-2" id="form35" rows="3" placeholder="Descripción"></textarea></div>
           <button type="submit" class="btn btn-primary">Enviar</button>
           </div>
         </div>
