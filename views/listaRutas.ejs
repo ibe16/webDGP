@@ -15,6 +15,8 @@
   <script src="assets/js/animate-in.js"></script>
   <link rel="stylesheet" href="assets/css/aquamarine.css">
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <script src="ejs.js"></script>
 </head>
 
 <body>
@@ -37,19 +39,18 @@
 
        <div class="row p-1 bg-info m-1">
            <div class="col-md-5 order-2 order-md-1">
-               <a href="ruta.html"><img class="img-fluid d-block my-3 mx-auto animate-in-left" src="215x140xb55ad31f80198046fe9b4597ac637fd0.jpg.pagespeed.ic.VgH-_BBqsx.jpg"
+               <a class="GET" href="ruta?nombreruta=<%-data.key%>"><img class="img-fluid d-block my-3 mx-auto animate-in-left" src="215x140xb55ad31f80198046fe9b4597ac637fd0.jpg.pagespeed.ic.VgH-_BBqsx.jpg"
                        width="500"></a> </div>
            <div class="col-md-7 align-self-center order-1 order-md-2 my-3 text-md-left text-center">
-               <a href="ruta.html">
+               <a class="GET" href="ruta?nombreruta=<%-data.key%>">
                    <h2><%=  data.key %></h2>
                </a>
                <p class="my-4 text-dark"> <%= data.child("descripcion").val() %> </p>
            </div>
        </div>
 
-        <% }); %>
    <% }); %>
-
+<% }); %>
 
 
       <hr class="mt-0">
@@ -60,7 +61,7 @@
       <div class="row">
         <div class="col-md-12"><img src="assets/imgs/Logo_GranáRoutes.png" width="30" height="30" class="d-inline-block align-top m-0" alt=""></div>
       </div><a class="navbar-brand" href="/index">&nbsp;Graná Routes&nbsp;</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item mx-2">

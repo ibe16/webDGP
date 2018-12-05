@@ -30,7 +30,7 @@ app.use(express.static(__dirname + '/public')); // If it doesn't find resoruces,
 app.set('view engine', 'ejs');
 
 /* Render pages */
-// idice
+// indice
 app.get('/', (req, res) => res.render('index'));
 app.get('/index', (req, res) => res.render('index'));
 
@@ -43,17 +43,26 @@ app.get('/register', (req, res) => res.render('registrarse'));
 // listado Rutas
 //app.get('/list', (req, res) => res.render('listaRutas'));
 
+//Consulta a la BD para caragar todas las rutas
 app.get('/listaRutas', function (req, res, next) {
   var db = admin.database();
   var ref = db.ref("rutas");
+	//Se cargan las rutas
   res.render('listaRutas', { ref: ref});
+
 });
 
 // proponerRutas
 app.get('/newRoute', (req, res) => res.render('proponerRuta'));
 
 // vista Ruta
-app.get('/ruta', (req, res) => res.render('ruta'));
+app.get('/ruta', function(req, res){
+	var nombre = req.query.nombreruta || " ";
+	var db = admin.database();
+	var ref = db.ref("rutas/"+nombre);
+	res.render('ruta', {ref :ref});
+});
+
 
 /* 404 Not found */
 app.use(function(req, res, next) {
