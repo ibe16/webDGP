@@ -10,8 +10,8 @@ var serviceAccount = require('./credenciales.json');
 
 /* Configuration */
 var testfire = admin.initializeApp({
-	credential: admin.credential.cert(serviceAccount),
-	databaseURL: 'https://granaroutesaplicacion.firebaseio.com'
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: 'https://granaroutesaplicacion.firebaseio.com'
 });
 
 console.log(testfire.name);
@@ -47,7 +47,7 @@ app.get('/register', (req, res) => res.render('registrarse'));
 app.get('/listaRutas', function (req, res, next) {
   var db = admin.database();
   var ref = db.ref("rutas");
-	//Se cargan las rutas
+  //Se cargan las rutas
   res.render('listaRutas', { ref: ref});
 
 });
@@ -57,14 +57,35 @@ app.get('/newRoute', (req, res) => res.render('proponerRuta'));
 
 // vista Ruta
 app.get('/ruta', function(req, res){
+<<<<<<< HEAD
 	var nombre = req.query.nombreruta || " ";
 	var db = admin.database();
 	var ref = db.ref("rutas/"+nombre);
 	var lugares = db.ref("lugares/");
 
 	res.render('ruta', {ref :ref, lugares:lugares});
+=======
+  var nombre = req.query.nombreruta || " ";
+  var db = admin.database();
+  var ref = db.ref("rutas/"+nombre);
+  res.render('ruta', {ref :ref});
+>>>>>>> 5321059061ebad8341b1775d645bc9fd2faaa937
 });
 
+/* GESTOR */
+// Menu
+app.get('/gestor', (req, res) => res.render('gestor'));
+
+// Sugerencias
+app.get('/listaProposiciones', (req, res) => res.render('listaProposiciones'));
+
+// Crear Ruta
+app.get('/crearRuta', (req, res) => res.render('crearRuta'));
+
+
+/* USUARIOS */
+// Modificar Usuario
+app.get('/modificarUsuario', (req, res) => res.render('modificarUsuario'));
 
 /* 404 Not found */
 app.use(function(req, res, next) {
