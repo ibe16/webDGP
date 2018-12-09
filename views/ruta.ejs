@@ -44,8 +44,13 @@
       
       <div class="row">
         <div class="col-md-12 mt-2">
-          <div class="row">
-            <div class="col-md-12"><img class="img-fluid d-block float-left mx-1" src="assets/imgs/movilidad.png" width="50"><img class="img-fluid d-block float-left mx-1" src="assets/imgs/vista.png" width="50"><img class="img-fluid d-block float-left mx-1" src="assets/imgs/auditivo.png" width="50"></div>
+          <div class="row"><div class="col-md-12">
+            <% lugares.on("value", function (lugaresSnapshot) { %>
+            <% snapshot.child("grupos").forEach(function (data) { %>
+            <img class="img-fluid d-block float-left mx-1" src="assets/imgs/<%= data.key %>.png" width="50" alt="<%= data.key %>">
+            <% }); %>
+          <% }); %>
+              </div>
           </div>
           <h2 class="mt-2 text-primary"><%= snapshot.child("nombre").val() %></h2>
           <p class="lead" contenteditable="true"><%= snapshot.child("descripcion").val() %><br></p>
