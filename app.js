@@ -102,7 +102,7 @@ app.post('/crearRuta', (req, res) => {
     f_valida = false;
   }
   // Lugares
-  if(!f_para.hasOwnProperty('lugares')) {
+  if(!f_para.hasOwnProperty('lugares') || !Array.isArray(f_para.lugares)) {
     f_valida = false;
   }
   // Grupos
@@ -114,7 +114,7 @@ app.post('/crearRuta', (req, res) => {
     // Si el formato no es valido saca mensaje
     // TODO : Render pagina anterior con campos erroneos resaltados en rojo
     res.send('Por favor vuelva a rellenar el formulario y \
-    no deje ningún campo en blanco. <a href="/crearRuta">Atrás</a>');
+    no deje ningún campo en blanco. Ten en cuenta que las rutas deben estar formadas por al menos dos lugares. <a href="/crearRuta">Atrás</a>');
   }
 
   /* Genera el Obj para subirlo a FireBase */
