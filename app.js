@@ -94,6 +94,10 @@ app.post('/crearRuta', (req, res) => {
   if(!f_para.hasOwnProperty('descripcion') || f_para.titulo.length <= 0) {
     f_valida = false;
   }
+  // Descripcion
+  if (!f_para.hasOwnProperty('imagen') || f_para.imagen.length <= 0) {
+    f_valida = false;
+  }
   // Url's
   if(!f_para.hasOwnProperty('mapaAndroid') ||
      !f_para.hasOwnProperty('mapaWEB') ||
@@ -123,7 +127,8 @@ app.post('/crearRuta', (req, res) => {
     descripcion : f_para.descripcion,
     map : f_para.mapaAndroid,
     mapWeb : f_para.mapaWEB,
-    nombre : f_para.titulo
+    nombre : f_para.titulo,
+    img : f_para.imagen
   }
   // Añadir los grupos || Razón -> Añadir booleano al value de la key
   nueva_ruta[f_para.titulo].grupos = {};
