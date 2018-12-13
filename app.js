@@ -4,6 +4,9 @@ const ejs = require('ejs');
 var bodyParser = require('body-parser');
 var firebase = require('firebase');
 var admin = require('firebase-admin');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+
 
 
 
@@ -29,6 +32,8 @@ const app = express();
 app.use(express.static(__dirname + '/public')); // If it doesn't find resoruces, GOTO public
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(cookieParser()); //To be able to parse cookies
+app.use(session({secret: "Shh, its a secret!"})); //To maintain open sessions
 app.set('view engine', 'ejs');
 
 /* Render pages */
@@ -66,10 +71,13 @@ app.get('/ruta', function(req, res){
 
 //iniciar sesion del Usuario
 
-app.post('/pruebalogin', (req, res) => {
+app.all('/pruebalogin', (req, res) => {
   // Get the ID token passed and the CSRF token.
-  const idToken = req.body.idToken.toString();
-  const csrfToken = req.body.csrfToken.toString();
+  const idToken = req.body.cookie;
+  //const csrfToken = req.body.csrfToken.toString();
+
+  console.log ("EL ID TOKEN ES: "+ idToken);
+  //console.log ("EL CSRF TOKEN ES: "+ csrfToken);
 
   // Set session expiration to 5 days.
   const expiresIn = 60 * 60 * 24 * 5 * 1000;
@@ -79,22 +87,30 @@ app.post('/pruebalogin', (req, res) => {
   // can be checked to ensure user was recently signed in before creating a session cookie.
   admin.auth().createSessionCookie(idToken, {expiresIn}).then((sessionCookie) => {
     // Set cookie policy for session cookie.
-    const options = {maxAge: expiresIn, httpOnly: true, secure: true};
-    res.cookie('session', sessionCookie, options);
+    console.log("LA SESSION COOKIE ES: " + sessionCookie);
+    const options = {maxAge: expiresIn, httpOnly: true, secure: true, resave:true};
+    //res.cookie('session', sessionCookie, options);
+    req.session.usuario = sessionCookie;
+    res.render('prueba_login');
     res.end(JSON.stringify({status: 'success'}));
+
+    console.log ("Hasta luego Maricarmen");
   }, error => {
     res.status(401).send('UNAUTHORIZED REQUEST!');
   });
 });
 
 
+
+
 app.get('/profile', (req, res) => {
-  const sessionCookie = req.cookies.session || '';
+  var sessionCookie = req.session.usuario || '';
+  console.log("LA COOKIE: "+sessionCookie);
   // Verify the session cookie. In this case an additional check is added to detect
   // if the user's Firebase session was revoked, user deleted/disabled, etc.
   admin.auth().verifySessionCookie(
     sessionCookie, true /** checkRevoked */).then((decodedClaims) => {
-    serveContentForUser('/profile', req, res, decodedClaims);
+    res.render('profile');
   }).catch(error => {
     // Session cookie is unavailable or invalid. Force user to login.
     res.redirect('/login');
@@ -110,7 +126,7 @@ app.get('/profile', (req, res) => {
 
 
 
-//app.get('/prueba_login', (req, res) => res.render('prueba_login'));
+app.get('/prueba_login', (req, res) => res.render('prueba_login'));
 
 /* GESTOR */
 // Menu

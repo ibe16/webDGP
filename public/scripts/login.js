@@ -15,15 +15,32 @@ function getCookie(cname) {
 }
 
 function postIdTokenToSessionLogin(url, idToken, csrfToken){
-  return $.ajax({
-        type: 'POST',
-        url: url,
-        data: {
-            idToken: idToken,
-            csrfToken: csrfToken
-        },
-        contentType: 'application/x-www-form-urlencoded'
-    });
+  alert ("vamos a hacer el POST");
+  // return $.ajax({
+  //       type: 'POST',
+  //       url: url,
+  //       data: {
+  //           idToken: idToken,
+  //           csrfToken: csrfToken
+  //       },
+  //       contentType: 'application/x-www-form-urlencoded'
+  //   });
+
+  var form = document.createElement( "form" );
+  form.setAttribute( "name", "formulario_cookie" );
+  form.setAttribute( "action", url );
+  form.setAttribute( "method", "post" );
+
+  var input = document.createElement( "input" );
+  input.setAttribute( "name", "cookie" );
+  input.setAttribute( "type", "hidden" );
+  input.setAttribute( "value", idToken );
+
+  form.appendChild( input );
+  document.getElementsByTagName( "body" )[0].appendChild( form );
+  document.formulario_cookie.submit();
+
+
 }
 
 function inicializarFirebase(){
