@@ -46,7 +46,7 @@ function postIdTokenToSessionLogin(url, idToken, csrfToken){
 function inicializarFirebase(){
   firebase.initializeApp({
     apiKey: 'AIzaSyDSQLVtFMbLE7REo5uFSVOxxfcnM4Q7MUI',
-    authDomain: 'granaroutesaplicacion.firebasepp.com'
+    authDomain: 'granaroutesaplicacion.firebaseapp.com'
   });
 
   alert("Ha leido el fichero");
@@ -89,7 +89,9 @@ firebase.auth().onAuthStateChanged(function(user) {
         // Session login endpoint is queried and the session cookie is set.
         // CSRF protection should be taken into account.
         // ...
+        //console.log(firebase.auth().getUserByEmail("juliorodri8@hotmail.com"));
         alert("Correcto");
+        
         var csrfToken = getCookie('csrfToken')
         return postIdTokenToSessionLogin('/pruebalogin', idToken, csrfToken);
       });

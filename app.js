@@ -14,9 +14,20 @@ var session = require('express-session');
 /* FireBase Configuration */
 var serviceAccount = require('./credenciales.json');
 var testfire = admin.initializeApp({
+  authDomain: "granaroutesaplicacion.firebaseapp.com",
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://granaroutesaplicacion.firebaseio.com'
+  apiKey: "AIzaSyDSQLVtFMbLE7REo5uFSVOxxfcnM4Q7MUI",
+  databaseURL: 'https://granaroutesaplicacion.firebaseio.com',
+  projectId: "granaroutesaplicacion",
+    storageBucket: "granaroutesaplicacion.appspot.com",
+    messagingSenderId: "576250634726"
 });
+
+/*firebase.initializeApp({
+    apiKey: 'AIzaSyDSQLVtFMbLE7REo5uFSVOxxfcnM4Q7MUI',
+    authDomain: 'granaroutesaplicacion.firebaseapp.com'
+  });*/
+
 console.log('[*]Base de Datos '+testfire.name+' inicializada.');
 // Acceso data - Ejemplo
 // var db = admin.database();
@@ -267,7 +278,110 @@ app.post('/crearLugar', (req, res) => {
 
 /* USUARIOS */
 // Modificar Usuario
-app.get('/modificarUsuario', (req, res) => res.render('modificarUsuario'));
+app.get('/modificarUsuario', function(req, res){
+    var user; //= admin.auth().currentUser;    <------- FALTARIA QUE ESTO FUNCIONARA
+    
+    admin.auth().getUserByEmail('juliorodri8@hotmail.com').then( function(usuario){
+        //console.log("Successfully fetched user data:", usuario.toJSON());
+        user= usuario.toJSON();
+        var db = admin.database();
+	    var ref = db.ref("usuarios/"+user.uid);
+        //console.log("Usuario "+ user.uid);
+
+	    res.render('modificarUsuario', {ref :ref});
+    });
+    
+
+    //var user = firebase.auth().currentUser;  
+	
+});
+
+app.post('/modificarUsuario', (req, res) => {
+
+  // Variables Auxiliares
+  var f_para = req.body;
+  var f_valida = true;
+  var password = false;
+
+  /* Comprueba que estan todos los parametros || TODO : Comprobar formato INPUT */
+  // Nombre
+  if(!f_para.hasOwnProperty('nombre') || f_para.nombre.length <= 0) {
+    f_valida = false;
+  }
+  // apellidos
+  if(!f_para.hasOwnProperty('apellidos') || f_para.apellidos.length <= 0) {
+    f_valida = false;
+  }
+  // email
+  if(!f_para.hasOwnProperty('email') || f_para.email.length <= 0) {
+    f_valida = false;
+  }
+    // email
+  if(f_para.passwordnueva1.length > 0 && (f_para.passwordnueva1 == f_para.passwordnueva2)) {
+    //f_valida = false;
+    password=true;
+  }
+
+
+  if(!f_valida) {
+    console.log('cagada');
+    // Si el formato no es valido saca mensaje
+    // TODO : Render pagina anterior con campos erroneos resaltados en rojo
+    res.send('Por favor vuelva a rellenar el formulario y \
+    no deje ningún campo en blanco. <a href="/modificarUsuario">Atrás</a>');
+  }else{
+    
+      var user;
+
+      admin.auth().getUserByEmail('juliorodri8@hotmail.com').then( function(usuario){
+            
+            user= usuario.toJSON();
+            var db = admin.database();
+	        var ref = db.ref("usuarios/"+user.uid);
+
+            //Lo de abajo esta metido aquí
+            var usuarioRef = admin.database().ref('usuarios/'+user.uid);    
+   
+              usuarioRef.set({
+                nombre: f_para.nombre ,
+                apellidos: f_para.apellidos,
+                email: f_para.email
+              });
+
+              admin.auth().updateUser( user.uid, {
+                  displayName: f_para.nombre,
+                  email: f_para.email,
+                }).then(function() {
+                  // Update successful.
+                  console.log("Usuario modificado correctamente");
+                }).catch(function(error) {
+                  // An error happened.
+                });
+            
+            
+
+            if(password){
+
+                admin.auth().updateUser( user.uid, {
+                  password: f_para.passwordnueva1
+                }).then(function() {
+                  // Update successful.
+                  console.log("Contraseña modificada correctamente");
+                }).catch(function(error) {
+                  // An error happened.
+                });
+
+            }
+
+
+
+              // Mensaje todo ha salido bien
+              res.send('Datos modificados correctamente \
+              <a href="/modificarUsuario">Visualizar usuario</a>');
+            });
+
+     }
+});
 
 /* 404 Not found */
 app.use(function(req, res, next) {
