@@ -119,18 +119,32 @@ app.get('/profile', (req, res) => {
   console.log("LA COOKIE: "+sessionCookie);
   // Verify the session cookie. In this case an additional check is added to detect
   // if the user's Firebase session was revoked, user deleted/disabled, etc.
-  admin.auth().verifySessionCookie(
-    sessionCookie, true /** checkRevoked */).then((decodedClaims) => {
-    res.render('profile');
+  var uid;
+  admin.auth().verifySessionCookie(sessionCookie).then(function(decodedToken) {
+    uid = decodedToken.uid;
+    console.log ("EL uid es: " + uid);
+    //res.render('profile') ;
+    serverContentForUser('profile', req, res, uid);
   }).catch(error => {
     // Session cookie is unavailable or invalid. Force user to login.
     res.redirect('/login');
   });
+
 });
 
 
-
-
+function serverContentForUser(url, req, res, uid){
+  admin.auth().getUser(uid)
+  .then(function(userRecord) {
+    // See the UserRecord reference doc for the contents of userRecord.
+    res.send('El nombre del usuario es ' + userRecord.email);
+    res.render(url) ;
+    console.log("Successfully fetched user data:", userRecord.toJSON());
+  })
+  .catch(function(error) {
+    console.log("Error fetching user data:", error);
+  });
+}
 
 
 
@@ -280,7 +294,7 @@ app.post('/crearLugar', (req, res) => {
 // Modificar Usuario
 app.get('/modificarUsuario', function(req, res){
     var user; //= admin.auth().currentUser;    <------- FALTARIA QUE ESTO FUNCIONARA
-    
+
     admin.auth().getUserByEmail('juliorodri8@hotmail.com').then( function(usuario){
         //console.log("Successfully fetched user data:", usuario.toJSON());
         user= usuario.toJSON();
@@ -290,10 +304,10 @@ app.get('/modificarUsuario', function(req, res){
 
 	    res.render('modificarUsuario', {ref :ref});
     });
-    
 
-    //var user = firebase.auth().currentUser;  
-	
+
+    //var user = firebase.auth().currentUser;
+
 });
 
 app.post('/modificarUsuario', (req, res) => {
@@ -330,18 +344,18 @@ app.post('/modificarUsuario', (req, res) => {
     res.send('Por favor vuelva a rellenar el formulario y \
     no deje ningún campo en blanco. <a href="/modificarUsuario">Atrás</a>');
   }else{
-    
+
       var user;
 
       admin.auth().getUserByEmail('juliorodri8@hotmail.com').then( function(usuario){
-            
+
             user= usuario.toJSON();
             var db = admin.database();
 	        var ref = db.ref("usuarios/"+user.uid);
 
             //Lo de abajo esta metido aquí
-            var usuarioRef = admin.database().ref('usuarios/'+user.uid);    
-   
+            var usuarioRef = admin.database().ref('usuarios/'+user.uid);
+
               usuarioRef.set({
                 nombre: f_para.nombre ,
                 apellidos: f_para.apellidos,
@@ -357,8 +371,8 @@ app.post('/modificarUsuario', (req, res) => {
                 }).catch(function(error) {
                   // An error happened.
                 });
-            
-            
+
+
 
             if(password){
 
