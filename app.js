@@ -6,9 +6,7 @@ var firebase = require('firebase');
 var admin = require('firebase-admin');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-
-
-
+var gesUsuarios = require('./gestionUsuarios');
 
 
 /* FireBase Configuration */
@@ -23,10 +21,10 @@ var testfire = admin.initializeApp({
     messagingSenderId: "576250634726"
 });
 
-/*firebase.initializeApp({
+firebase.initializeApp({
     apiKey: 'AIzaSyDSQLVtFMbLE7REo5uFSVOxxfcnM4Q7MUI',
     authDomain: 'granaroutesaplicacion.firebaseapp.com'
-  });*/
+});
 
 console.log('[*]Base de Datos '+testfire.name+' inicializada.');
 // Acceso data - Ejemplo
@@ -57,6 +55,47 @@ app.get('/login', (req, res) => res.render('login'));
 
 // register
 app.get('/register', (req, res) => res.render('registrarse'));
+
+app.post('/register', (req, res) => {
+
+  // Variables Auxilares
+  var f_para = req.body;
+  var f_valida = true;
+
+  /* Comprueba que los parametros no estan vacios */
+  // Nombre
+  if(!f_para.hasOwnProperty('nombre') || f_para.nombre.length <= 0) {
+    console.log(1);
+    f_valida = false;
+  }
+
+  // Apellidos
+  if(!f_para.hasOwnProperty('apellidos') || f_para.apellidos.length <= 0) {
+    console.log(2);
+    f_valida = false;
+  }
+
+  // Correo
+  if(!f_para.hasOwnProperty('email') || (f_para.email.length) <= 0) {
+    console.log(3);
+    f_valida = false;
+  }
+
+  // Contrasena
+  if (!f_para.hasOwnProperty('passwd') || f_para.passwd <= 6) {
+    console.log(4);
+    f_valida = false;
+  }
+
+  // Redirecciona si no es correcta sino crea usuario
+  if (!f_valida) {
+    res.redirect('/register');
+  } else {
+    gesUsuarios.crearUsuario(firebase, admin, f_para);
+    res.redirect('/login');
+  }
+
+});
 
 //Consulta a la BD para caragar todas las rutas
 /*app.get('/listaRutas', function (req, res, next) {
@@ -439,4 +478,4 @@ app.use(function(req, res, next) {
 
 /* Start the server */
 app.listen(8008);
-console.log('Express server listening on port 8080.');
+console.log('Express server listening on port 8008.');

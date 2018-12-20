@@ -31,49 +31,56 @@
         <div class="col-md-6 col-10 bg-white mx-auto mt-5 pt-3 pb-2 px-0" style="">
           <h1 class="mb-4">Registrarse</h1>
           <div class="col-md-12">
-            <div class="form-group"><label>Nombre</label><input type="email" class="form-control" placeholder="Nombre">
-              <div class="form-group mt-2"><label>Apellidos</label><input type="email" class="form-control" placeholder="Apellidos"></div>
+            <form class="" method="POST" action="#">
+              <div class="form-group">
+                <label>Nombre</label><input type="text" name="nombre" class="form-control" placeholder="Nombre">
+                <div class="form-group mt-2">
+                  <label>Apellidos</label><input type="text" name="apellidos" class="form-control" placeholder="Apellidos">
+                </div>
+              </div>
+              
+              <div class="form-group"> 
+                <label>Correo electrónico</label> <input type="email" name="email" class="form-control" placeholder="Introduce tu e-mail"> <small class="form-text text-muted">No compartiremos tu correo electrónico sin tu permiso.</small> 
+              </div>
+              <div class="form-group">
+                <label>Contraseña</label> <input type="password" name="passwd" class="form-control" placeholder="Introduce tu contraseña"> </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+              </form>
             </div>
-            <form class="">
-              <div class="form-group"> <label>Correo electrónico</label> <input type="email" class="form-control" placeholder="Introduce tu e-mail"> <small class="form-text text-muted">No compartiremos tu correo electrónico sin tu permiso.</small> </div>
-              <div class="form-group"><label>Contraseña</label> <input type="password" class="form-control" placeholder="Introduce tu contraseña"> </div>
-              <button type="submit" class="btn btn-primary">Enviar</button>
-            </form>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="bg-primary">
-    <div class="container">
-      <div class="row">
-        <div class="p-4 col-md-4">
-          <h2 class="mb-4 text-light">Graná Routes</h2>
-          <p class="text-light">Tu aplicación de rutas accesibles por Granada.</p>
-        </div>
-        <div class="p-4 col-md-4">
-          <h2 class="mb-4 text-light">Mapa del sitio</h2>
-          <ul class="list-unstyled text-light"> <a href="/" class="text-light">Home</a> <br> <a href="/list" class="text-light">Lista de rutas</a> <br> <a href="/register" class="text-light">Regístrate</a> <br> <a href="/login" class="text-light">Iniciar sesión</a>
-          </ul>
-        </div>
-        <div class="p-4 col-md-4">
-          <h2 class="mb-0 text-light">Contacto</h2><br>
-          <a class="btn navbar-btn text-white btn-dark mx-2 ml-5 mb-3" href="/newRoute">Proponer ruta</a>
-          <p class="text-light"> <a href="#" class="text-light">
+    <div class="bg-primary">
+      <div class="container">
+        <div class="row">
+          <div class="p-4 col-md-4">
+            <h2 class="mb-4 text-light">Graná Routes</h2>
+            <p class="text-light">Tu aplicación de rutas accesibles por Granada.</p>
+          </div>
+          <div class="p-4 col-md-4">
+            <h2 class="mb-4 text-light">Mapa del sitio</h2>
+            <ul class="list-unstyled text-light"> <a href="/" class="text-light">Home</a> <br> <a href="/list" class="text-light">Lista de rutas</a> <br> <a href="/register" class="text-light">Regístrate</a> <br> <a href="/login" class="text-light">Iniciar sesión</a>
+            </ul>
+          </div>
+          <div class="p-4 col-md-4">
+            <h2 class="mb-0 text-light">Contacto</h2><br>
+            <a class="btn navbar-btn text-white btn-dark mx-2 ml-5 mb-3" href="/newRoute">Proponer ruta</a>
+            <p class="text-light"> <a href="#" class="text-light">
               <i class="fa d-inline mr-3 text-muted fa-envelope-o"></i>info@granaroutes.com</a> </p>
-          <p><br></p>
+              <p><br></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 mt-3">
+              <p class="text-center text-light">© Copyright 2018 Graná Routes - All rights reserved. </p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12 mt-3">
-          <p class="text-center text-light">© Copyright 2018 Graná Routes - All rights reserved. </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-</body>
-
-</html>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+    
+    </html>
