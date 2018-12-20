@@ -59,14 +59,48 @@ app.get('/login', (req, res) => res.render('login'));
 app.get('/register', (req, res) => res.render('registrarse'));
 
 //Consulta a la BD para caragar todas las rutas
-app.get('/listaRutas', function (req, res, next) {
+/*app.get('/listaRutas', function (req, res, next) {
   var db = admin.database();
   var ref = db.ref("rutas");
   //Se cargan las rutas
   res.render('listaRutas', {ref: ref});
 
+});*/
+///////////////////////////////////
+app.get('/listaRutas', (req, res) => {
+  var sessionCookie = req.session.usuario || '';
+  console.log("EN LISTA RUTAAAAS");
+  // Verify the session cookie. In this case an additional check is added to detect
+  // if the user's Firebase session was revoked, user deleted/disabled, etc.
+  var uid;
+  var db = admin.database();
+  var ref = db.ref("rutas");
+  admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
+    uid = decodedToken.uid;
+    console.log("EL uid es: " + uid);
+    //res.render('profile') ;
+    serverPageForUser('listaRutas', req, res, uid, ref);
+  }).catch(error => {
+    // Session cookie is unavailable or invalid. Force user to login.
+    res.render('listaRutas', {ref: ref, uid:null});
+  });
+
 });
 
+
+function serverPageForUser(url, req, res, uid, ref) {
+  admin.auth().getUser(uid)
+    .then(function (userRecord) {
+      // See the UserRecord reference doc for the contents of userRecord.
+      //res.send('El nombre del usuario es ' + userRecord.email);
+      res.render(url, {uid:uid, ref:ref});
+      console.log("Successfully fetched user data:", userRecord.toJSON());
+    })
+    .catch(function (error) {
+      console.log("Error fetching user data:", error);
+    });
+}
+///////////////////////////////////
 // proponerRutas
 app.get('/newRoute', (req, res) => res.render('proponerRuta'));
 
