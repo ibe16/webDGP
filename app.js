@@ -59,18 +59,18 @@ app.get('/', (req, res) => {
   var uid;
   admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
     uid = decodedToken.uid;
-    console.log("EL uid es: " + uid);
+    //console.log("EL uid es: " + uid);
     //res.render('profile') ;
 
     ref.on("value", function (snapshot) {
       snapshot.forEach(function (data) {
-        console.log(uid + " comparo con " + data.key)
+        //console.log(uid + " comparo con " + data.key)
         if(uid==data.key){
-          console.log("soy admin")
+          //console.log("soy admin")
           serverPageForUser('gestor', req, res, uid, null);
         }
         else{
-          console.log("No soy admin")
+          //console.log("No soy admin")
           serverPageForUser('index', req, res, uid, null);
         }
       });
@@ -92,18 +92,18 @@ app.get('/index', (req, res) => {
   var uid;
   admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
     uid = decodedToken.uid;
-    console.log("EL uid es: " + uid);
+    //console.log("EL uid es: " + uid);
     //res.render('profile') ;
 
     ref.on("value", function (snapshot) {
       snapshot.forEach(function (data) {
-        console.log(uid + " comparo con " + data.key)
+        //console.log(uid + " comparo con " + data.key)
         if (uid == data.key) {
-          console.log("soy admin")
+          //console.log("soy admin")
           serverPageForUser('gestor', req, res, uid, null);
         }
         else {
-          console.log("No soy admin")
+          //console.log("No soy admin")
           serverPageForUser('index', req, res, uid, null);
         }
       });
@@ -126,7 +126,7 @@ app.get('/login', (req, res) => {
   var uid;
   admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
     uid = decodedToken.uid;
-    console.log("EL uid es: " + uid);
+    //console.log("EL uid es: " + uid);
     //res.render('profile') ;
     serverPageForUser('login', req, res, uid, null);
   }).catch(error => {
@@ -145,7 +145,7 @@ app.get('/register', (req, res) => {
   var uid;
   admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
     uid = decodedToken.uid;
-    console.log("EL uid es: " + uid);
+    //console.log("EL uid es: " + uid);
     //res.render('profile') ;
     serverPageForUser('registrarse', req, res, uid, null);
   }).catch(error => {
@@ -545,18 +545,18 @@ app.get('/crearLugar', (req, res) => {
   var uid;
   admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
     uid = decodedToken.uid;
-    console.log("EL uid es: " + uid);
+    //console.log("EL uid es: " + uid);
     //res.render('profile') ;
 
     ref.on("value", function (snapshot) {
       snapshot.forEach(function (data) {
-        console.log(uid + " comparo con " + data.key)
+        //console.log(uid + " comparo con " + data.key)
         if (uid == data.key) {
-          console.log("soy admin")
+          //console.log("soy admin")
           serverPageForUser('crearLugar', req, res, uid, null);
         }
         else {
-          console.log("No soy admin")
+          //console.log("No soy admin")
           serverPageForUser('index', req, res, uid, null);
         }
       });
