@@ -15,7 +15,7 @@ function getCookie(cname) {
 }
 
 function postIdTokenToSessionLogin(url, idToken, csrfToken){
-  alert ("vamos a hacer el POST");
+  //alert ("vamos a hacer el POST");
   // return $.ajax({
   //       type: 'POST',
   //       url: url,
@@ -49,14 +49,14 @@ function inicializarFirebase(){
     authDomain: 'granaroutesaplicacion.firebaseapp.com'
   });
 
-  alert("Ha leido el fichero");
+  //alert("Ha leido el fichero");
 }
 
 function signIn(){
-  alert("Iniciando sesión");
+  //alert("Iniciando sesión");
 
   var email_usuario = document.getElementById('email_usuario').value;
-  alert ("El email es: "+ email_usuario);
+  //alert ("El email es: "+ email_usuario);
   var pass_usuario = document.getElementById('pass_usuario').value;
 
   firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
@@ -90,7 +90,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         // CSRF protection should be taken into account.
         // ...
         //console.log(firebase.auth().getUserByEmail("juliorodri8@hotmail.com"));
-        alert("Correcto");
+        //alert("Correcto");
         
         var csrfToken = getCookie('csrfToken')
         return postIdTokenToSessionLogin('/pruebalogin', idToken, csrfToken);

@@ -21,7 +21,11 @@
             <a class="nav-link" href="/list">Rutas</a>
           </li>
         </ul>
-        <a class="btn navbar-btn text-white mx-2 btn-primary" href="#download">Descargar</a>
+        <% if(uid==null || uid==undefined){%>
+        <a class="btn navbar-btn text-white mx-2 btn-primary" href="/login">Iniciar sesión</a>
+        <% } if(uid!=undefined || uid!=null){ %>
+        <a class="btn navbar-btn text-white mx-2 btn-primary" href="/ModificarUsuario">Modificar perfil</a>
+        <% }%>
       </div>
     </div>
   </nav>
@@ -33,7 +37,13 @@
           <h1 class="mb-4">Proponer una nueva ruta</h1>
           <div class="form-group"><input type="email" class="form-control" id="form33" placeholder="Tu correo electrónico">
             <div class="form-group"><input type="text" class="form-control mt-2" id="form34" placeholder="Título de la ruta">
-              <div class="form-group"><textarea class="form-control mt-2" id="form35" rows="3" placeholder="Descripción de la ruta"></textarea><button type="submit" class="btn btn-primary mt-3">Enviar</button></div>
+              <div class="form-group"><textarea class="form-control mt-2" id="form35" rows="3" placeholder="Descripción de la ruta"></textarea>
+                
+                        <% if(uid==null || uid==undefined){%>
+                        <a href="/login">Debes iniciar sesión para poder proponer rutas.</a>
+                        <% } if(uid!=undefined || uid!=null){ %>
+                        <button type="submit" class="btn btn-primary mt-3">Enviar</button></div>
+                        <% }%>
             </div>
           </div>
         </div>

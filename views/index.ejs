@@ -21,7 +21,11 @@
             <a class="nav-link" href="/listaRutas">Rutas</a>
           </li>
         </ul>
+        <% if(uid==null || uid==undefined){%>
         <a class="btn navbar-btn text-white mx-2 btn-primary" href="/login">Iniciar sesión</a>
+        <% } if(uid!=undefined || uid!=null){ %>
+        <a class="btn navbar-btn text-white mx-2 btn-primary" href="/ModificarUsuario">Modificar perfil</a>
+        <% }%>
       </div>
     </div>
   </nav>

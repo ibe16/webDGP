@@ -19,10 +19,14 @@
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item mx-2">
-            <a class="nav-link" href="/list">Rutas</a>
+            <a class="nav-link" href="/listaRutas">Rutas</a>
           </li>
         </ul>
+        <% if(uid==null || uid==undefined){%>
         <a class="btn navbar-btn text-white mx-2 btn-primary" href="/login">Iniciar sesión</a>
+        <% } if(uid!=undefined || uid!=null){ %>
+        <a class="btn navbar-btn text-white mx-2 btn-primary" href="/ModificarUsuario">Modificar perfil</a>
+        <% }%>
       </div>
     </div>
   </nav>
@@ -31,20 +35,26 @@
       <div class="row">
         <div class="col-md-6 col-10 bg-white p-5 mx-auto mt-5" style="">
           <h1 class="mb-4">Iniciar sesión</h1>
-
-
+        <% if(uid==null || uid==undefined){%>
           <!--Formulario para el envío por POST del email y la pass -->
-          <div >
-            <div class="form-group"> <input id="email_usuario" name="email" type="email" class="form-control" placeholder="Correo electrónico" id="form9"> </div>
-            <div class="form-group mb-3"> <input id="pass_usuario" name="password" type="password" class="form-control" placeholder="Contraseña" id="form10"> <small class="form-text text-muted text-right"></small> </div>
-            <button id="submit" type="submit" class="btn btn-primary" onclick="signIn()" >Iniciar sesión</button>
+          <div>
+            <div class="form-group"> <input id="email_usuario" name="email" type="email" class="form-control" placeholder="Correo electrónico"
+                id="form9"> </div>
+            <div class="form-group mb-3"> <input id="pass_usuario" name="password" type="password" class="form-control"
+                placeholder="Contraseña" id="form10"> <small class="form-text text-muted text-right"></small> </div>
+            <button id="submit" type="submit" class="btn btn-primary" onclick="signIn()">Iniciar sesión</button>
           </div>
-
-
-
+          
+          
+          
           <a href="/register">
             <p class="">Si no tienes cuenta, regístrate.</p>
           </a>
+        <% } if(uid!=undefined || uid!=null){ %>
+          <p>Ya has iniciado sesión con una cuenta.</p>
+        <% }%>
+
+      
         </div>
       </div>
     </div>
@@ -58,7 +68,7 @@
         </div>
         <div class="p-4 col-md-4">
           <h2 class="mb-4 text-light">Mapa del sitio</h2>
-          <ul class="list-unstyled text-light"> <a href="/" class="text-light">Home</a> <br> <a href="/list" class="text-light">Lista de rutas</a> <br> <a href="/register" class="text-light">Regístrate</a> <br> <a href="/login" class="text-light">Iniciar sesión</a>
+          <ul class="list-unstyled text-light"> <a href="/" class="text-light">Home</a> <br> <a href="/listaRutas" class="text-light">Lista de rutas</a> <br> <a href="/register" class="text-light">Regístrate</a> <br> <a href="/login" class="text-light">Iniciar sesión</a>
           </ul>
         </div>
         <div class="p-4 col-md-4">

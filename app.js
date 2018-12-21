@@ -6,7 +6,7 @@ var firebase = require('firebase');
 var admin = require('firebase-admin');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-var gesUsuarios = require('./gestionUsuarios');
+//var gesUsuarios = require('./gestionUsuarios');
 
 
 /* FireBase Configuration */
@@ -47,14 +47,78 @@ app.set('view engine', 'ejs');
 
 /* Render pages */
 // indice
-app.get('/', (req, res) => res.render('index'));
-app.get('/index', (req, res) => res.render('index'));
+//app.get('/', (req, res) => res.render('index'));
+//app.get('/index', (req, res) => res.render('index'));
+
+app.get('/', (req, res) => {
+  var sessionCookie = req.session.usuario || '';
+
+  var uid;
+  admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
+    uid = decodedToken.uid;
+    console.log("EL uid es: " + uid);
+    //res.render('profile') ;
+    serverPageForUser('index', req, res, uid, null);
+  }).catch(error => {
+    // Session cookie is unavailable or invalid. Force user to login.
+    res.render('index', { uid: null });
+  });
+
+});
+
+app.get('/index', (req, res) => {
+  var sessionCookie = req.session.usuario || '';
+
+  var uid;
+  admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
+    uid = decodedToken.uid;
+    console.log("EL uid es: " + uid);
+    //res.render('profile') ;
+    serverPageForUser('index', req, res, uid, null);
+  }).catch(error => {
+    // Session cookie is unavailable or invalid. Force user to login.
+    res.render('index', { uid: null });
+  });
+
+});
 
 // login
-app.get('/login', (req, res) => res.render('login'));
+//app.get('/login', (req, res) => res.render('login'));
+
+app.get('/login', (req, res) => {
+  var sessionCookie = req.session.usuario || '';
+
+  var uid;
+  admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
+    uid = decodedToken.uid;
+    console.log("EL uid es: " + uid);
+    //res.render('profile') ;
+    serverPageForUser('login', req, res, uid, null);
+  }).catch(error => {
+    // Session cookie is unavailable or invalid. Force user to login.
+    res.render('login', { uid: null });
+  });
+
+});
 
 // register
-app.get('/register', (req, res) => res.render('registrarse'));
+//app.get('/register', (req, res) => res.render('registrarse'));
+
+app.get('/register', (req, res) => {
+  var sessionCookie = req.session.usuario || '';
+
+  var uid;
+  admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
+    uid = decodedToken.uid;
+    console.log("EL uid es: " + uid);
+    //res.render('profile') ;
+    serverPageForUser('registrarse', req, res, uid, null);
+  }).catch(error => {
+    // Session cookie is unavailable or invalid. Force user to login.
+    res.render('registrarse', { uid: null });
+  });
+
+});
 
 app.post('/register', (req, res) => {
 
@@ -141,7 +205,24 @@ function serverPageForUser(url, req, res, uid, ref) {
 }
 ///////////////////////////////////
 // proponerRutas
-app.get('/newRoute', (req, res) => res.render('proponerRuta'));
+//app.get('/newRoute', (req, res) => res.render('proponerRuta'));
+
+app.get('/newRoute', (req, res) => {
+  var sessionCookie = req.session.usuario || '';
+
+  var uid;
+  admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
+    uid = decodedToken.uid;
+    console.log("EL uid es: " + uid);
+    //res.render('profile') ;
+    serverPageForUser('proponerRuta', req, res, uid, null);
+  }).catch(error => {
+    // Session cookie is unavailable or invalid. Force user to login.
+    res.render('proponerRuta', { uid: null });
+  });
+
+});
+
 
 // vista Ruta
 app.get('/ruta', function(req, res){
@@ -176,7 +257,7 @@ app.all('/pruebalogin', (req, res) => {
     //res.cookie('session', sessionCookie, options);
     req.session.usuario = sessionCookie;
     res.render('prueba_login');
-    res.end(JSON.stringify({status: 'success'}));
+    //res.end(JSON.stringify({status: 'success'}));
 
     console.log ("Hasta luego Maricarmen");
   }, error => {
@@ -365,7 +446,7 @@ app.post('/crearLugar', (req, res) => {
 
 /* USUARIOS */
 // Modificar Usuario
-app.get('/modificarUsuario', function(req, res){
+/*app.get('/modificarUsuario', function(req, res){
     var user; //= admin.auth().currentUser;    <------- FALTARIA QUE ESTO FUNCIONARA
 
     admin.auth().getUserByEmail('juliorodri8@hotmail.com').then( function(usuario){
@@ -381,7 +462,25 @@ app.get('/modificarUsuario', function(req, res){
 
     //var user = firebase.auth().currentUser;
 
+});*/
+
+app.get('/modificarUsuario', (req, res) => {
+  var sessionCookie = req.session.usuario || '';
+
+  var uid;
+  admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
+    uid = decodedToken.uid;
+    var db = admin.database();
+    var ref = db.ref("usuarios/" + uid);
+    serverPageForUser('modificarUsuario', req, res, uid, ref);
+  }).catch(error => {
+    // Session cookie is unavailable or invalid. Force user to login.
+    res.render('modificarUsuario', { ref: ref, uid: null });
+  });
+
 });
+
+
 
 app.post('/modificarUsuario', (req, res) => {
 
