@@ -6,7 +6,7 @@ var firebase = require('firebase');
 var admin = require('firebase-admin');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-//var gesUsuarios = require('./gestionUsuarios');
+var gesUsuarios = require('./gestionUsuarios');
 
 
 /* FireBase Configuration */
@@ -164,25 +164,21 @@ app.post('/register', (req, res) => {
   /* Comprueba que los parametros no estan vacios */
   // Nombre
   if(!f_para.hasOwnProperty('nombre') || f_para.nombre.length <= 0) {
-    console.log(1);
     f_valida = false;
   }
 
   // Apellidos
   if(!f_para.hasOwnProperty('apellidos') || f_para.apellidos.length <= 0) {
-    console.log(2);
     f_valida = false;
   }
 
   // Correo
   if(!f_para.hasOwnProperty('email') || (f_para.email.length) <= 0) {
-    console.log(3);
     f_valida = false;
   }
 
   // Contrasena
   if (!f_para.hasOwnProperty('passwd') || f_para.passwd <= 6) {
-    console.log(4);
     f_valida = false;
   }
 
