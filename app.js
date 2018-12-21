@@ -53,12 +53,29 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
   var sessionCookie = req.session.usuario || '';
 
+  var db = admin.database();
+  var ref = db.ref("admin");
+
   var uid;
   admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
     uid = decodedToken.uid;
     console.log("EL uid es: " + uid);
     //res.render('profile') ;
-    serverPageForUser('index', req, res, uid, null);
+
+    ref.on("value", function (snapshot) {
+      snapshot.forEach(function (data) {
+        console.log(uid + " comparo con " + data.key)
+        if(uid==data.key){
+          console.log("soy admin")
+          serverPageForUser('gestor', req, res, uid, null);
+        }
+        else{
+          console.log("No soy admin")
+          serverPageForUser('index', req, res, uid, null);
+        }
+      });
+    });
+    
   }).catch(error => {
     // Session cookie is unavailable or invalid. Force user to login.
     res.render('index', { uid: null });
@@ -69,18 +86,36 @@ app.get('/', (req, res) => {
 app.get('/index', (req, res) => {
   var sessionCookie = req.session.usuario || '';
 
+  var db = admin.database();
+  var ref = db.ref("admin");
+
   var uid;
   admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
     uid = decodedToken.uid;
     console.log("EL uid es: " + uid);
     //res.render('profile') ;
-    serverPageForUser('index', req, res, uid, null);
+
+    ref.on("value", function (snapshot) {
+      snapshot.forEach(function (data) {
+        console.log(uid + " comparo con " + data.key)
+        if (uid == data.key) {
+          console.log("soy admin")
+          serverPageForUser('gestor', req, res, uid, null);
+        }
+        else {
+          console.log("No soy admin")
+          serverPageForUser('index', req, res, uid, null);
+        }
+      });
+    });
+
   }).catch(error => {
     // Session cookie is unavailable or invalid. Force user to login.
     res.render('index', { uid: null });
   });
 
 });
+
 
 // login
 //app.get('/login', (req, res) => res.render('login'));
@@ -197,7 +232,7 @@ function serverPageForUser(url, req, res, uid, ref) {
       // See the UserRecord reference doc for the contents of userRecord.
       //res.send('El nombre del usuario es ' + userRecord.email);
       res.render(url, {uid:uid, ref:ref});
-      console.log("Successfully fetched user data:", userRecord.toJSON());
+      //console.log("Successfully fetched user data:", userRecord.toJSON());
     })
     .catch(function (error) {
       console.log("Error fetching user data:", error);
@@ -241,7 +276,7 @@ app.all('/pruebalogin', (req, res) => {
   const idToken = req.body.cookie;
   //const csrfToken = req.body.csrfToken.toString();
 
-  console.log ("EL ID TOKEN ES: "+ idToken);
+  //console.log ("EL ID TOKEN ES: "+ idToken);
   //console.log ("EL CSRF TOKEN ES: "+ csrfToken);
 
   // Set session expiration to 5 days.
@@ -259,7 +294,6 @@ app.all('/pruebalogin', (req, res) => {
     res.render('prueba_login');
     //res.end(JSON.stringify({status: 'success'}));
 
-    console.log ("Hasta luego Maricarmen");
   }, error => {
     res.status(401).send('UNAUTHORIZED REQUEST!');
   });
@@ -270,13 +304,13 @@ app.all('/pruebalogin', (req, res) => {
 
 app.get('/profile', (req, res) => {
   var sessionCookie = req.session.usuario || '';
-  console.log("LA COOKIE: "+sessionCookie);
+  //console.log("LA COOKIE: "+sessionCookie);
   // Verify the session cookie. In this case an additional check is added to detect
   // if the user's Firebase session was revoked, user deleted/disabled, etc.
   var uid;
   admin.auth().verifySessionCookie(sessionCookie).then(function(decodedToken) {
     uid = decodedToken.uid;
-    console.log ("EL uid es: " + uid);
+    //console.log ("EL uid es: " + uid);
     //res.render('profile') ;
     serverContentForUser('profile', req, res, uid);
   }).catch(error => {
@@ -293,7 +327,7 @@ function serverContentForUser(url, req, res, uid){
     // See the UserRecord reference doc for the contents of userRecord.
     res.send('El nombre del usuario es ' + userRecord.email);
     res.render(url) ;
-    console.log("Successfully fetched user data:", userRecord.toJSON());
+    //console.log("Successfully fetched user data:", userRecord.toJSON());
   })
   .catch(function(error) {
     console.log("Error fetching user data:", error);
@@ -309,16 +343,117 @@ app.get('/prueba_login', (req, res) => res.render('prueba_login'));
 
 /* GESTOR */
 // Menu
-app.get('/gestor', (req, res) => res.render('gestor'));
+//app.get('/gestor', (req, res) => res.render('gestor'));
+app.get('/gestor', (req, res) => {
+  var sessionCookie = req.session.usuario || '';
+
+  var db = admin.database();
+  var ref = db.ref("admin");
+
+  var uid;
+  admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
+    uid = decodedToken.uid;
+    console.log("EL uid es: " + uid);
+    //res.render('profile') ;
+
+    ref.on("value", function (snapshot) {
+      snapshot.forEach(function (data) {
+        console.log(uid + " comparo con " + data.key)
+        if (uid == data.key) {
+          console.log("soy admin")
+          serverPageForUser('gestor', req, res, uid, null);
+        }
+        else {
+          console.log("No soy admin")
+          serverPageForUser('index', req, res, uid, null);
+        }
+      });
+    });
+
+  }).catch(error => {
+    // Session cookie is unavailable or invalid. Force user to login.
+    res.render('index', { uid: null });
+  });
+
+});
+
 
 // Sugerencias
-app.get('/listaProposiciones', (req, res) => res.render('listaProposiciones'));
+//app.get('/listaProposiciones', (req, res) => res.render('listaProposiciones'));
+
+app.get('/listaProposiciones', (req, res) => {
+  var sessionCookie = req.session.usuario || '';
+
+  var db = admin.database();
+  var ref = db.ref("admin");
+
+  var uid;
+  admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
+    uid = decodedToken.uid;
+    console.log("EL uid es: " + uid);
+    //res.render('profile') ;
+
+    ref.on("value", function (snapshot) {
+      snapshot.forEach(function (data) {
+        console.log(uid + " comparo con " + data.key)
+        if (uid == data.key) {
+          console.log("soy admin")
+          serverPageForUser('listaProposiciones', req, res, uid, null);
+        }
+        else {
+          console.log("No soy admin")
+          serverPageForUser('index', req, res, uid, null);
+        }
+      });
+    });
+
+  }).catch(error => {
+    // Session cookie is unavailable or invalid. Force user to login.
+    res.render('index', { uid: null });
+  });
+
+});
 
 // Crear Ruta - Formulario
-app.get('/crearRuta', function(req, res, next){
+/*app.get('/crearRuta', function(req, res, next){
   var db = admin.database();
   var ref = db.ref("lugares");
   res.render('crearRuta', { ref : ref });
+});*/
+
+app.get('/crearRuta', (req, res) => {
+  var sessionCookie = req.session.usuario || '';
+
+  var db = admin.database();
+  var ref = db.ref("admin");
+
+  var uid;
+  admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
+    uid = decodedToken.uid;
+    console.log("EL uid es: " + uid);
+    //res.render('profile') ;
+
+    ref.on("value", function (snapshot) {
+      snapshot.forEach(function (data) {
+        console.log(uid + " comparo con " + data.key)
+        if (uid == data.key) {
+          console.log("soy admin")
+          var db = admin.database();
+          var ref = db.ref("lugares");
+          serverPageForUser('crearRuta', req, res, uid, ref);
+        }
+        else {
+          console.log("No soy admin")
+          serverPageForUser('index', req, res, uid, null);
+        }
+      });
+    });
+
+  }).catch(error => {
+    // Session cookie is unavailable or invalid. Force user to login.
+    res.render('index', { uid: null });
+  });
+
 });
 
 // Crear Ruta - Procesamiento y Update BaseDatos
@@ -399,7 +534,40 @@ app.post('/crearRuta', (req, res) => {
 });
 
 // Crear Lugar - Formulario
-app.get('/crearLugar', (req, res) => res.render('crearLugar'));
+//app.get('/crearLugar', (req, res) => res.render('crearLugar'));
+
+app.get('/crearLugar', (req, res) => {
+  var sessionCookie = req.session.usuario || '';
+
+  var db = admin.database();
+  var ref = db.ref("admin");
+
+  var uid;
+  admin.auth().verifySessionCookie(sessionCookie).then(function (decodedToken) {
+    uid = decodedToken.uid;
+    console.log("EL uid es: " + uid);
+    //res.render('profile') ;
+
+    ref.on("value", function (snapshot) {
+      snapshot.forEach(function (data) {
+        console.log(uid + " comparo con " + data.key)
+        if (uid == data.key) {
+          console.log("soy admin")
+          serverPageForUser('crearLugar', req, res, uid, null);
+        }
+        else {
+          console.log("No soy admin")
+          serverPageForUser('index', req, res, uid, null);
+        }
+      });
+    });
+
+  }).catch(error => {
+    // Session cookie is unavailable or invalid. Force user to login.
+    res.render('index', { uid: null });
+  });
+
+});
 
 // Crear Lugar - Procesamiento y Update BaseDatos
 app.post('/crearLugar', (req, res) => {
@@ -420,7 +588,6 @@ app.post('/crearLugar', (req, res) => {
   }
 
   if(!f_valida) {
-    console.log('cagada');
     // Si el formato no es valido saca mensaje
     // TODO : Render pagina anterior con campos erroneos resaltados en rojo
     res.send('Por favor vuelva a rellenar el formulario y \
@@ -510,7 +677,7 @@ app.post('/modificarUsuario', (req, res) => {
 
 
   if(!f_valida) {
-    console.log('cagada');
+ 
     // Si el formato no es valido saca mensaje
     // TODO : Render pagina anterior con campos erroneos resaltados en rojo
     res.send('Por favor vuelva a rellenar el formulario y \
